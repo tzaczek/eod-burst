@@ -17,11 +17,11 @@
   <a href="https://github.com/tzaczek/eod-burst">
     <img src="https://img.shields.io/badge/⭐_Star_&_Clone-GitHub-181717?style=for-the-badge&logo=github" alt="GitHub" />
   </a>
+  <a href="https://codespaces.new/tzaczek/eod-burst?quickstart=1">
+    <img src="https://img.shields.io/badge/▶_Try_it_FREE-Codespaces-24292f?style=for-the-badge&logo=github" alt="Open in Codespaces" />
+  </a>
   <a href="https://github.com/tzaczek/eod-burst/stargazers">
     <img src="https://img.shields.io/github/stars/tzaczek/eod-burst?style=for-the-badge&color=yellow" alt="Stars" />
-  </a>
-  <a href="https://github.com/tzaczek/eod-burst/fork">
-    <img src="https://img.shields.io/github/forks/tzaczek/eod-burst?style=for-the-badge&color=blue" alt="Forks" />
   </a>
 </p>
 
@@ -600,6 +600,45 @@ docker compose build
 | Docker Compose | ECS / EKS |
 | Prometheus | CloudWatch |
 | Jaeger | AWS X-Ray |
+
+---
+
+## ☁️ Free Cloud Hosting Options
+
+Want to run this system in the cloud for demos? Here are **free options**:
+
+### 🏆 GitHub Codespaces (Recommended)
+
+The easiest option — runs directly from your GitHub repository!
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/tzaczek/eod-burst?quickstart=1)
+
+**Free Tier:** 60 hours/month (120 hours for Pro)
+
+```bash
+# Codespaces automatically:
+# 1. Sets up the dev environment
+# 2. Copies .env.example to .env
+# 3. Starts all Docker containers
+# 4. Opens the Test Dashboard in your browser!
+```
+
+### 🚀 Other Free Options
+
+| Platform | Free Tier | Best For |
+|:---------|:----------|:---------|
+| [**Gitpod**](https://gitpod.io) | 50 hours/month | Browser-based IDE |
+| [**Oracle Cloud**](https://www.oracle.com/cloud/free/) | Always Free VM (1GB RAM) | Persistent hosting |
+| [**Railway**](https://railway.app) | $5 credit/month | Simple deployments |
+| [**Render**](https://render.com) | 750 hours/month | Web services |
+| [**Fly.io**](https://fly.io) | 3 shared VMs free | Global edge hosting |
+
+### 💡 Quick Demo with Codespaces
+
+1. Click the **"Open in GitHub Codespaces"** button above
+2. Wait ~3 minutes for containers to start
+3. Access the **Test Dashboard** at the forwarded port 8083
+4. Show the Architecture page and run test scenarios live!
 
 ---
 
