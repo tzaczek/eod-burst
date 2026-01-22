@@ -16,16 +16,16 @@
   ],
 
   "portsAttributes": {
-    "8083": { "label": "🧪 Test Dashboard", "onAutoForward": "openBrowser" },
-    "3000": { "label": "📊 Grafana" },
-    "16686": { "label": "🔍 Jaeger" },
-    "8090": { "label": "📨 Kafka UI" },
-    "9001": { "label": "📦 MinIO Console" }
+    "8083": { "label": "🧪 Test Dashboard", "onAutoForward": "notify" },
+    "3000": { "label": "📊 Grafana", "onAutoForward": "notify" },
+    "16686": { "label": "🔍 Jaeger", "onAutoForward": "silent" },
+    "8090": { "label": "📨 Kafka UI", "onAutoForward": "silent" },
+    "9001": { "label": "📦 MinIO Console", "onAutoForward": "silent" }
   },
 
-  "postCreateCommand": "cp .env.example .env && docker compose pull",
+  "postCreateCommand": "cp .env.example .env && chmod +x .devcontainer/start-services.sh && docker compose pull",
   
-  "postStartCommand": "docker compose up -d",
+  "postStartCommand": ".devcontainer/start-services.sh",
 
   "customizations": {
     "vscode": {
