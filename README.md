@@ -14,6 +14,23 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/tzaczek/eod-burst">
+    <img src="https://img.shields.io/badge/⭐_Star_&_Clone-GitHub-181717?style=for-the-badge&logo=github" alt="GitHub" />
+  </a>
+  <a href="https://github.com/tzaczek/eod-burst/stargazers">
+    <img src="https://img.shields.io/github/stars/tzaczek/eod-burst?style=for-the-badge&color=yellow" alt="Stars" />
+  </a>
+  <a href="https://github.com/tzaczek/eod-burst/fork">
+    <img src="https://img.shields.io/github/forks/tzaczek/eod-burst?style=for-the-badge&color=blue" alt="Forks" />
+  </a>
+</p>
+
+<p align="center">
+  🚀 <strong>Ready to build high-frequency trading systems?</strong><br>
+  <a href="https://github.com/tzaczek/eod-burst"><b>Clone this repository</b></a> and have a production-ready CQRS architecture running in minutes!
+</p>
+
+<p align="center">
   <a href="#-key-capabilities">Capabilities</a> •
   <a href="#-quick-start">Quick Start</a> •
   <a href="#-architecture">Architecture</a> •
@@ -100,8 +117,11 @@ The business needs two **contradictory capabilities** simultaneously:
 
 ```powershell
 # Clone the repository
-git clone https://github.com/your-org/eod-burst.git
+git clone https://github.com/tzaczek/eod-burst.git
 cd eod-burst
+
+# Set up credentials (first time only)
+cp .env.example .env
 
 # Start all services with full observability
 .\scripts\start-test-runner.ps1 -Build
