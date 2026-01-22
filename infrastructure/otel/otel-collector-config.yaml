@@ -1,0 +1,116 @@
+# OpenTelemetry Collector Configuration
+# Receives telemetry from all EOD services and exports to backends
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+  # Scrape Prometheus metrics from services
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'eod-services'
+          scrape_interval: 10s
+          static_configs:
+            - targets: 
+              - 'ingestion:8080'
+              - 'flash-pnl:8081'
+              - 'regulatory:8082'
+          metrics_path: /metrics/prometheus
+          
+        - job_name: 'redis-exporter'
+          scrape_interval: 10s
+          static_configs:
+            - targets: ['redis-exporter:9121']
+
+processors:
+  batch:
+    timeout: 5s
+    send_batch_size: 1000
+    send_batch_max_size: 2000
+
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 512
+    spike_limit_mib: 128
+
+  # Add resource attributes
+  resource:
+    attributes:
+      - key: deployment.environment
+        value: docker
+        action: upsert
+      - key: service.namespace
+        value: eod-burst
+        action: upsert
+
+  # Filter out health check spans
+  filter/traces:
+    traces:
+      span:
+        - 'attributes["http.target"] == "/health"'
+        - 'attributes["http.route"] == "/health"'
+        - 'attributes["url.path"] == "/health"'
+
+exporters:
+  # Jaeger for distributed tracing
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+
+  # Prometheus for metrics
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    namespace: eod
+    const_labels:
+      environment: docker
+
+  # Loki for logs (via loki exporter)
+  loki:
+    endpoint: http://loki:3100/loki/api/v1/push
+    default_labels_enabled:
+      exporter: true
+      level: true
+
+  # Debug output (limited)
+  debug:
+    verbosity: basic
+    sampling_initial: 5
+    sampling_thereafter: 200
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+  
+  zpages:
+    endpoint: 0.0.0.0:55679
+
+service:
+  extensions: [health_check, zpages]
+  
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, filter/traces, batch, resource]
+      exporters: [otlp/jaeger, debug]
+    
+    metrics:
+      receivers: [otlp, prometheus]
+      processors: [memory_limiter, batch, resource]
+      exporters: [prometheus]
+    
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, resource]
+      exporters: [loki, debug]
+
+  telemetry:
+    logs:
+      level: info
+    metrics:
+      address: 0.0.0.0:8888

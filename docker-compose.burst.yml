@@ -1,0 +1,61 @@
+version: '3.8'
+
+# EOD Burst Mode Override
+# Usage: docker compose -f docker-compose.yml -f docker-compose.burst.yml up -d
+#
+# This configuration scales up the application services for EOD burst handling.
+# Apply this overlay when approaching 4:00 PM or during high-volume periods.
+
+services:
+  ingestion:
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+        reservations:
+          cpus: '1'
+          memory: 512M
+    environment:
+      Simulator__BurstMultiplier: "20"
+      Simulator__SimulateBurstNow: "true"
+
+  flash-pnl:
+    deploy:
+      replicas: 6  # Scale to match Kafka partitions (12 / 2)
+      resources:
+        limits:
+          cpus: '4'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+
+  regulatory:
+    deploy:
+      replicas: 4  # Scale to match Kafka partitions (12 / 3)
+      resources:
+        limits:
+          cpus: '4'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+    environment:
+      SqlServer__BulkBatchSize: "10000"
+
+  kafka:
+    environment:
+      # Increase for burst handling
+      KAFKA_NUM_IO_THREADS: 8
+      KAFKA_NUM_NETWORK_THREADS: 6
+      KAFKA_SOCKET_REQUEST_MAX_BYTES: 209715200
+
+  redis:
+    command: >
+      redis-server 
+      --appendonly yes 
+      --maxmemory 1gb 
+      --maxmemory-policy allkeys-lru
+      --save ""

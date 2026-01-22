@@ -1,0 +1,173 @@
+:root {
+  /* Cyberpunk-inspired color palette */
+  --bg-primary: #0a0e14;
+  --bg-secondary: #111820;
+  --bg-tertiary: #1a222d;
+  --bg-card: linear-gradient(145deg, #151c25 0%, #0d1117 100%);
+  
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  
+  --accent-cyan: #00d9ff;
+  --accent-magenta: #ff006e;
+  --accent-green: #00ff9f;
+  --accent-yellow: #ffd700;
+  --accent-orange: #ff6b35;
+  --accent-purple: #8b5cf6;
+  
+  --status-passed: #00ff9f;
+  --status-failed: #ff006e;
+  --status-running: #00d9ff;
+  --status-pending: #6e7681;
+  --status-cancelled: #ff6b35;
+  
+  --border-color: #30363d;
+  --border-glow: rgba(0, 217, 255, 0.3);
+  
+  --font-display: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --shadow-glow: 0 0 20px rgba(0, 217, 255, 0.15);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-display);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(ellipse at 20% 20%, rgba(0, 217, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 0, 110, 0.05) 0%, transparent 50%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px var(--accent-cyan), 0 0 10px var(--accent-cyan); }
+  50% { box-shadow: 0 0 10px var(--accent-cyan), 0 0 20px var(--accent-cyan); }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes progressFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.animate-in {
+  animation: slideIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(0, 217, 255, 0.3);
+  color: var(--text-primary);
+}
+
+/* Focus styling */
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Code styling */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--bg-tertiary);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  color: var(--accent-cyan);
+}
+
+/* Prevent text selection on interactive elements */
+button, .nav-tab, .sidebar-link {
+  user-select: none;
+}
+
+/* Loading shimmer effect */
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 0%,
+    var(--bg-secondary) 50%,
+    var(--bg-tertiary) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}

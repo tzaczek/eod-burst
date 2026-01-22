@@ -1,0 +1,63 @@
+# EOD Burst System - OpenTelemetry Collector Configuration
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    timeout: 5s
+    send_batch_size: 1000
+    send_batch_max_size: 1500
+
+  memory_limiter:
+    check_interval: 5s
+    limit_mib: 400
+    spike_limit_mib: 100
+
+  resource:
+    attributes:
+      - key: environment
+        value: docker
+        action: upsert
+
+exporters:
+  # Export traces to Jaeger
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+
+  # Export metrics to Prometheus
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    namespace: eod
+    resource_to_telemetry_conversion:
+      enabled: true
+
+  # Debug output (optional)
+  debug:
+    verbosity: normal
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, resource]
+      exporters: [otlp/jaeger, debug]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, resource]
+      exporters: [prometheus, debug]
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, resource]
+      exporters: [debug]

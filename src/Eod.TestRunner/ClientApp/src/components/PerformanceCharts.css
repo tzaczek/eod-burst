@@ -1,0 +1,229 @@
+.performance-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.chart-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.chart-card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 8px 32px rgba(0, 217, 255, 0.1);
+}
+
+.chart-card:first-child {
+  grid-column: 1 / -1;
+}
+
+.chart-card.small {
+  grid-column: span 1;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.chart-header h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.chart-icon {
+  font-size: 1.1rem;
+}
+
+.chart-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.chart-container {
+  margin: 1rem 0;
+}
+
+.pie-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.chart-highlight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 107, 53, 0.02));
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.highlight-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.highlight-value {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-orange);
+}
+
+/* Latency Legend */
+.latency-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.latency-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.latency-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.latency-name {
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.latency-value {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.latency-target {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+/* Pie Legend */
+.pie-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pie-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.pie-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Metrics Summary */
+.metrics-summary {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.summary-item:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.summary-icon {
+  font-size: 2rem;
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-value {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  line-height: 1;
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .performance-charts {
+    grid-template-columns: 1fr;
+  }
+  
+  .chart-card,
+  .chart-card:first-child,
+  .chart-card.small {
+    grid-column: 1;
+  }
+  
+  .metrics-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .metrics-summary {
+    grid-template-columns: 1fr;
+  }
+  
+  .pie-container {
+    flex-direction: column;
+  }
+}

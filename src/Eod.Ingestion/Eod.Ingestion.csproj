@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Eod.Ingestion</RootNamespace>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Eod.Shared\Eod.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- MinIO S3 client -->
+    <PackageReference Include="Minio" Version="6.0.1" />
+    
+    <!-- Health checks -->
+    <PackageReference Include="AspNetCore.HealthChecks.Kafka" Version="8.0.1" />
+  </ItemGroup>
+
+</Project>

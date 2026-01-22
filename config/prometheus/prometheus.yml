@@ -1,0 +1,80 @@
+# EOD Burst System - Prometheus Configuration
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    environment: docker
+
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: prometheus
+
+  # Kafka Exporter
+  - job_name: 'kafka'
+    static_configs:
+      - targets: ['kafka-exporter:9308']
+        labels:
+          service: kafka
+
+  # Redis Exporter
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+        labels:
+          service: redis
+
+  # Application Services (ASP.NET Core metrics via OpenTelemetry Prometheus exporter)
+  - job_name: 'ingestion'
+    metrics_path: '/metrics/prometheus'
+    static_configs:
+      - targets: ['ingestion:8080']
+        labels:
+          service: ingestion
+
+  - job_name: 'flash-pnl'
+    metrics_path: '/metrics/prometheus'
+    static_configs:
+      - targets: ['flash-pnl:8081']
+        labels:
+          service: flash-pnl
+
+  - job_name: 'regulatory'
+    metrics_path: '/metrics/prometheus'
+    static_configs:
+      - targets: ['regulatory:8082']
+        labels:
+          service: regulatory
+
+  - job_name: 'test-runner'
+    metrics_path: '/metrics/prometheus'
+    static_configs:
+      - targets: ['test-runner:8083']
+        labels:
+          service: test-runner
+
+  # OpenTelemetry Collector metrics
+  - job_name: 'otel-collector'
+    static_configs:
+      - targets: ['otel-collector:8888']
+        labels:
+          service: otel-collector
+
+  # Jaeger (for health checks)
+  - job_name: 'jaeger'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['jaeger:14269']
+        labels:
+          service: jaeger
+
+  # Schema Registry
+  - job_name: 'schema-registry'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['schema-registry:8081']
+        labels:
+          service: schema-registry

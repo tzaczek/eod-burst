@@ -1,0 +1,13 @@
+# EOD Burst System - Grafana Dashboard Provisioning
+apiVersion: 1
+
+providers:
+  - name: 'EOD Burst Dashboards'
+    orgId: 1
+    folder: 'EOD Burst'
+    folderUid: eod-burst
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

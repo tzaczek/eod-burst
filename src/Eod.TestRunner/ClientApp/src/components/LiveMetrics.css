@@ -1,0 +1,121 @@
+.live-metrics {
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--accent-cyan) 10%, var(--bg-secondary)),
+    color-mix(in srgb, var(--accent-magenta) 5%, var(--bg-secondary))
+  );
+  border: 1px solid var(--accent-cyan);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 30px rgba(0, 217, 255, 0.1);
+}
+
+.metrics-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.pulse-indicator {
+  width: 10px;
+  height: 10px;
+  background: var(--status-running);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 10px var(--status-running);
+}
+
+.metrics-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.test-count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  background: var(--bg-tertiary);
+  border-radius: 9999px;
+  color: var(--accent-cyan);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.metric-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.metric-icon {
+  font-size: 1.5rem;
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  line-height: 1;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.active-test {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.test-progress-mini {
+  width: 100%;
+}
+
+.test-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.test-step {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-progress {
+  height: 3px;
+  background: var(--bg-tertiary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.mini-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+  transition: width 0.3s ease;
+}

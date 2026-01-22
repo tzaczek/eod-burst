@@ -1,0 +1,367 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Open Jaeger UI",
+      "tooltip": "Open Jaeger for detailed trace analysis",
+      "type": "link",
+      "url": "http://localhost:16686"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "gridPos": { "h": 3, "w": 24, "x": 0, "y": 0 },
+      "id": 1,
+      "options": {
+        "content": "# 🔍 Distributed Tracing Dashboard\n\nTrack individual requests across **Ingestion → Flash P&L → Regulatory** services. Select a service below and click on traces to explore the full request flow.",
+        "mode": "markdown"
+      },
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 3 },
+      "id": 100,
+      "panels": [],
+      "title": "📊 Service Overview",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
+            ]
+          }
+        }
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 4 },
+      "id": 10,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "value_and_name"
+      },
+      "targets": [
+        { "expr": "up{job=\"eod-ingestion\"}", "legendFormat": "Ingestion", "refId": "A" }
+      ],
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
+            ]
+          }
+        }
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 4 },
+      "id": 11,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "value_and_name"
+      },
+      "targets": [
+        { "expr": "up{job=\"eod-flash-pnl\"}", "legendFormat": "Flash P&L", "refId": "A" }
+      ],
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "green", "value": 1 }
+            ]
+          }
+        }
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 4 },
+      "id": 12,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "value_and_name"
+      },
+      "targets": [
+        { "expr": "up{job=\"eod-regulatory\"}", "legendFormat": "Regulatory", "refId": "A" }
+      ],
+      "title": "",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 8 },
+      "id": 101,
+      "panels": [],
+      "title": "🔗 Traces - $service",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "jaeger", "uid": "jaeger" },
+      "gridPos": { "h": 14, "w": 24, "x": 0, "y": 9 },
+      "id": 2,
+      "options": {
+        "enableStreaming": true
+      },
+      "targets": [
+        {
+          "queryType": "search",
+          "service": "$service",
+          "limit": 100,
+          "refId": "A"
+        }
+      ],
+      "title": "Recent Traces",
+      "type": "traces"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 23 },
+      "id": 102,
+      "panels": [],
+      "title": "📈 Request Latency",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "ms"
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 24 },
+      "id": 3,
+      "options": {
+        "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom" },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.50, sum(rate(http_server_request_duration_seconds_bucket{job=\"eod-ingestion\"}[1m])) by (le)) * 1000",
+          "legendFormat": "Ingestion p50",
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.95, sum(rate(http_server_request_duration_seconds_bucket{job=\"eod-ingestion\"}[1m])) by (le)) * 1000",
+          "legendFormat": "Ingestion p95",
+          "refId": "B"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.50, sum(rate(http_server_request_duration_seconds_bucket{job=\"eod-flash-pnl\"}[1m])) by (le)) * 1000",
+          "legendFormat": "Flash P&L p50",
+          "refId": "C"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "histogram_quantile(0.95, sum(rate(http_server_request_duration_seconds_bucket{job=\"eod-flash-pnl\"}[1m])) by (le)) * 1000",
+          "legendFormat": "Flash P&L p95",
+          "refId": "D"
+        }
+      ],
+      "title": "HTTP Request Latency (p50/p95)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "reqps"
+        }
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 24 },
+      "id": 4,
+      "options": {
+        "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom" },
+        "tooltip": { "mode": "multi", "sort": "desc" }
+      },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "sum(rate(http_server_request_duration_seconds_count{job=\"eod-ingestion\"}[1m]))",
+          "legendFormat": "Ingestion",
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "sum(rate(http_server_request_duration_seconds_count{job=\"eod-flash-pnl\"}[1m]))",
+          "legendFormat": "Flash P&L",
+          "refId": "B"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "sum(rate(http_server_request_duration_seconds_count{job=\"eod-regulatory\"}[1m]))",
+          "legendFormat": "Regulatory",
+          "refId": "C"
+        }
+      ],
+      "title": "Request Rate by Service",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 32 },
+      "id": 103,
+      "panels": [],
+      "title": "🔗 Quick Links",
+      "type": "row"
+    },
+    {
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 33 },
+      "id": 20,
+      "options": {
+        "content": "### 🔵 Ingestion Traces\n[Explore in Jaeger →](http://localhost:16686/search?service=eod-ingestion)",
+        "mode": "markdown"
+      },
+      "type": "text"
+    },
+    {
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 33 },
+      "id": 21,
+      "options": {
+        "content": "### 🟢 Flash P&L Traces\n[Explore in Jaeger →](http://localhost:16686/search?service=eod-flash-pnl)",
+        "mode": "markdown"
+      },
+      "type": "text"
+    },
+    {
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 33 },
+      "id": 22,
+      "options": {
+        "content": "### 🟠 Regulatory Traces\n[Explore in Jaeger →](http://localhost:16686/search?service=eod-regulatory)",
+        "mode": "markdown"
+      },
+      "type": "text"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["eod", "tracing"],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "eod-ingestion",
+          "value": "eod-ingestion"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Service",
+        "multi": false,
+        "name": "service",
+        "options": [
+          { "selected": true, "text": "eod-ingestion", "value": "eod-ingestion" },
+          { "selected": false, "text": "eod-flash-pnl", "value": "eod-flash-pnl" },
+          { "selected": false, "text": "eod-regulatory", "value": "eod-regulatory" }
+        ],
+        "query": "eod-ingestion,eod-flash-pnl,eod-regulatory",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": { "from": "now-15m", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "EOD Burst - Tracing",
+  "uid": "eod-tracing",
+  "version": 1
+}

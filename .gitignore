@@ -1,0 +1,344 @@
+# ============================================================================
+# EOD Burst System - Git Ignore
+# ============================================================================
+
+# ============================================================================
+# CREDENTIALS & SECRETS (CRITICAL - Never commit these!)
+# ============================================================================
+
+# Environment files with secrets
+.env
+.env.*
+!.env.example
+*.local
+.secrets
+secrets/
+**/secrets/
+
+# Connection strings and credentials
+**/appsettings.*.local.json
+**/appsettings.Local.json
+**/appsettings.Production.json
+**/appsettings.Secrets.json
+*.pfx
+*.p12
+*.key
+*.pem
+*.crt
+*.cer
+!*.example.key
+!*.example.pem
+
+# Azure/AWS/Cloud credentials
+*.publishsettings
+azure.json
+aws-credentials
+.aws/
+credentials.json
+service-account*.json
+
+# API Keys and tokens
+**/apikeys.json
+**/tokens.json
+*apikey*
+*secret*
+!*secret*.cs
+!*secret*.md
+
+# ============================================================================
+# .NET BUILD OUTPUT
+# ============================================================================
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Oo]ut/
+.dotnet/
+artifacts/
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+project.lock.json
+project.fragment.lock.json
+*.nuget.props
+*.nuget.targets
+nuget.exe
+
+# MSBuild
+*.csproj.user
+*.vbproj.user
+*.fsproj.user
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# .NET Core
+*.runtimeconfig.json
+*.deps.json
+
+# ============================================================================
+# NODE.JS / REACT (ClientApp)
+# ============================================================================
+
+# Dependencies
+**/node_modules/
+**/bower_components/
+**/jspm_packages/
+
+# Build output
+**/dist/
+**/build/
+**/.next/
+**/.nuxt/
+**/wwwroot/
+!**/wwwroot/.gitkeep
+
+# Vite
+**/.vite/
+
+# Package manager files
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
+.npm/
+.yarn/
+.pnp.*
+
+# Cache
+**/.eslintcache
+**/.stylelintcache
+**/.parcel-cache/
+**/.cache/
+
+# Coverage
+**/coverage/
+**/.nyc_output/
+
+# TypeScript
+*.tsbuildinfo
+
+# ============================================================================
+# VISUAL STUDIO & IDES
+# ============================================================================
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.cache
+*.userprefs
+*.sln.DotSettings.user
+launchSettings.json
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# JetBrains Rider/IntelliJ
+.idea/
+*.sln.iml
+*.iml
+
+# Cursor
+.cursor/
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# ============================================================================
+# TEST RESULTS & COVERAGE
+# ============================================================================
+
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+*.coverage
+*.coveragexml
+*.lcov
+coverage*.xml
+coverage*.json
+TestResults/
+.coverage
+
+# ============================================================================
+# DOCKER & CONTAINERS
+# ============================================================================
+
+docker-compose.override.yml
+docker-compose.local.yml
+.docker/
+**/docker-data/
+
+# ============================================================================
+# DATABASE & STORAGE
+# ============================================================================
+
+# SQL Server
+*.mdf
+*.ldf
+*.ndf
+*.bak
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# MinIO/S3 local data
+minio-data/
+s3-data/
+storage-data/
+
+# Redis
+dump.rdb
+*.rdb
+redis-data/
+
+# Kafka
+kafka-data/
+kafka-logs/
+zookeeper-data/
+
+# ============================================================================
+# LOCAL DATA DIRECTORIES
+# ============================================================================
+
+/data/
+/logs/
+/temp/
+/tmp/
+/.data/
+/local-data/
+**/local-data/
+
+# ============================================================================
+# OPERATING SYSTEM
+# ============================================================================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ============================================================================
+# MISCELLANEOUS
+# ============================================================================
+
+# Editor swap/backup files
+*.swp
+*.swo
+*.swn
+*~
+\#*\#
+.#*
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+!*.zip.example
+
+# Profiling
+*.dmp
+*.stackdump
+*.trace
+
+# Generated documentation (if not needed in repo)
+# Uncomment if you don't want docs in repo:
+# /docs/_site/
+# /docs/.sass-cache/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# ============================================================================
+# PROJECT SPECIFIC
+# ============================================================================
+
+# Local scripts with credentials
+scripts/local-*.ps1
+scripts/local-*.sh
+scripts/*.local.*
+
+# Performance/Load test results (large files)
+**/load-test-results/
+**/performance-results/
+
+# Grafana local data
+grafana-data/
+
+# Prometheus local data  
+prometheus-data/
+
+# Jaeger local data
+jaeger-data/
+
+# ============================================================================

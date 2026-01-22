@@ -1,0 +1,37 @@
+# Prometheus Configuration for EOD Burst
+global:
+  scrape_interval: 10s
+  evaluation_interval: 10s
+
+scrape_configs:
+  # Scrape OTEL Collector's Prometheus exporter (aggregated metrics)
+  - job_name: 'otel-collector'
+    static_configs:
+      - targets: ['otel-collector:8889']
+    metrics_path: /metrics
+
+  # Scrape EOD services directly for Prometheus metrics
+  - job_name: 'eod-ingestion'
+    static_configs:
+      - targets: ['ingestion:8080']
+    metrics_path: /metrics/prometheus
+
+  - job_name: 'eod-flash-pnl'
+    static_configs:
+      - targets: ['flash-pnl:8081']
+    metrics_path: /metrics/prometheus
+
+  - job_name: 'eod-regulatory'
+    static_configs:
+      - targets: ['regulatory:8082']
+    metrics_path: /metrics/prometheus
+
+  # Redis Exporter
+  - job_name: 'redis-exporter'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+
+  # Kafka Exporter
+  - job_name: 'kafka-exporter'
+    static_configs:
+      - targets: ['kafka-exporter:9308']

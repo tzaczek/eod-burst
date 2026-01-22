@@ -1,0 +1,252 @@
+.path-comparison {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.comparison-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.comparison-header h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.header-icon {
+  font-size: 1.5rem;
+}
+
+.comparison-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Comparison Grid */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: stretch;
+  margin-bottom: 2rem;
+}
+
+/* Path Cards */
+.path-card {
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.path-card:hover {
+  transform: translateY(-3px);
+}
+
+.path-card.hot {
+  border-color: rgba(255, 107, 53, 0.3);
+}
+
+.path-card.hot:hover {
+  border-color: var(--accent-orange);
+  box-shadow: 0 8px 32px rgba(255, 107, 53, 0.15);
+}
+
+.path-card.cold {
+  border-color: rgba(0, 217, 255, 0.3);
+}
+
+.path-card.cold:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 8px 32px rgba(0, 217, 255, 0.15);
+}
+
+.path-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.path-icon {
+  font-size: 1.75rem;
+}
+
+.path-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Metrics */
+.path-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.metric-row:last-child {
+  border-bottom: none;
+}
+
+.metric-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.label-icon {
+  font-size: 0.9rem;
+}
+
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.metric-value.hot {
+  color: var(--accent-orange);
+}
+
+.metric-value.cold {
+  color: var(--status-passed);
+}
+
+/* Visual Bar */
+.path-visual {
+  padding-top: 0.5rem;
+}
+
+.visual-bar {
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 1s ease-out;
+}
+
+.visual-bar.hot {
+  background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow));
+}
+
+.visual-bar.cold {
+  background: linear-gradient(90deg, var(--accent-cyan), var(--status-passed));
+}
+
+.bar-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--bg-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* VS Divider */
+.vs-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
+}
+
+.vs-line {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(180deg, transparent, var(--border-color), transparent);
+}
+
+.vs-text {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+/* Solution Banner */
+.solution-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, rgba(0, 255, 159, 0.1), rgba(0, 255, 159, 0.02));
+  border: 1px solid rgba(0, 255, 159, 0.3);
+  border-radius: 12px;
+}
+
+.solution-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.solution-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.solution-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--status-passed);
+  margin-bottom: 0.25rem;
+}
+
+.solution-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .vs-divider {
+    flex-direction: row;
+    padding: 0.5rem 0;
+  }
+  
+  .vs-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+  }
+  
+  .solution-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}

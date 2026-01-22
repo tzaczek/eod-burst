@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package eod.trades;
+
+option csharp_namespace = "Eod.Shared.Protos";
+
+// Core trade message envelope - wraps raw FIX with parsed fields
+message TradeEnvelope {
+    // Original raw bytes for replay/audit
+    bytes raw_fix = 1;
+    
+    // Timing metadata
+    int64 receive_timestamp_ticks = 2;  // Stopwatch.GetTimestamp() for nanosecond precision
+    int64 gateway_timestamp_utc = 3;    // Unix milliseconds
+    string gateway_id = 4;              // Hostname of ingestion service
+    
+    // Parsed trade fields (extracted during ingestion)
+    string exec_id = 10;                // Unique execution ID from exchange
+    string order_id = 11;               // Parent order ID (for CAT linking)
+    string cl_ord_id = 12;              // Client order ID
+    
+    string symbol = 20;                 // Ticker symbol (e.g., "AAPL")
+    string security_id = 21;            // CUSIP/ISIN if available
+    string exchange = 22;               // Executing venue (e.g., "NYSE", "NASDAQ")
+    
+    int64 quantity = 30;                // Shares traded
+    int64 price_mantissa = 31;          // Price * 10^8 to avoid floating point
+    int32 price_exponent = 32;          // Exponent (typically -8)
+    Side side = 33;                     // BUY or SELL
+    
+    string trader_id = 40;              // Trader identifier
+    string account = 41;                // Trading account
+    string strategy_code = 42;          // Strategy identifier
+    
+    int64 exec_timestamp_utc = 50;      // When trade executed (Unix ms)
+    
+    // FIX-specific fields
+    string fix_msg_type = 60;           // e.g., "8" for ExecutionReport
+    int32 fix_seq_num = 61;             // FIX sequence number
+    string fix_sender = 62;             // SenderCompID
+    string fix_target = 63;             // TargetCompID
+}
+
+enum Side {
+    SIDE_UNSPECIFIED = 0;
+    SIDE_BUY = 1;
+    SIDE_SELL = 2;
+    SIDE_SELL_SHORT = 3;
+    SIDE_SELL_SHORT_EXEMPT = 4;
+}
+
+// Price update message for market data
+message PriceUpdate {
+    string symbol = 1;
+    PriceType price_type = 2;
+    int64 price_mantissa = 3;
+    int32 price_exponent = 4;
+    int64 timestamp_utc = 5;
+    string source = 6;
+}
+
+enum PriceType {
+    PRICE_TYPE_UNSPECIFIED = 0;
+    PRICE_TYPE_OFFICIAL_CLOSE = 1;
+    PRICE_TYPE_LAST_TRADE = 2;
+    PRICE_TYPE_BID = 3;
+    PRICE_TYPE_ASK = 4;
+    PRICE_TYPE_MID = 5;
+}
+
+// P&L update message for Redis pub/sub
+message PnlUpdate {
+    string trader_id = 1;
+    string symbol = 2;
+    int64 position_quantity = 3;
+    int64 realized_pnl_mantissa = 4;
+    int64 unrealized_pnl_mantissa = 5;
+    int64 mark_price_mantissa = 6;
+    int32 price_exponent = 7;
+    string mark_source = 8;             // "OFFICIAL", "LTP", "MID", "STALE"
+    int64 timestamp_utc = 9;
+}

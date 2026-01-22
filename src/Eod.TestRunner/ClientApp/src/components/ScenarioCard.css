@@ -1,0 +1,205 @@
+.scenario-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.scenario-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--type-color, var(--accent-cyan));
+  opacity: 0.8;
+}
+
+.scenario-card:hover {
+  border-color: var(--type-color, var(--accent-cyan));
+  box-shadow: var(--shadow-card), 0 0 30px color-mix(in srgb, var(--type-color, var(--accent-cyan)) 15%, transparent);
+  transform: translateY(-2px);
+}
+
+.scenario-card.running {
+  border-color: var(--status-running);
+  animation: glow 2s ease-in-out infinite;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.type-icon {
+  font-size: 1.5rem;
+}
+
+.type-badge {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.5rem;
+  background: color-mix(in srgb, var(--type-color, var(--accent-cyan)) 20%, transparent);
+  color: var(--type-color, var(--accent-cyan));
+  border-radius: 4px;
+}
+
+.scenario-name {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.scenario-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.parameters-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.param {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.param-label {
+  font-size: 0.625rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.param-value {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Progress Section */
+.progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--bg-primary);
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.progress-bar {
+  height: 4px;
+  background: var(--bg-tertiary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+  background-size: 200% 100%;
+  animation: progressFlow 2s linear infinite;
+  transition: width 0.3s ease;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-step {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.progress-percent {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+}
+
+.live-stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent-green);
+}
+
+/* Actions */
+.card-actions {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-run {
+  background: linear-gradient(135deg, var(--type-color, var(--accent-cyan)), color-mix(in srgb, var(--type-color, var(--accent-cyan)) 70%, var(--accent-magenta)));
+  color: var(--bg-primary);
+}
+
+.btn-run:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px color-mix(in srgb, var(--type-color, var(--accent-cyan)) 40%, transparent);
+}
+
+.btn-cancel {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--status-failed);
+  color: var(--status-failed);
+}
+
+.btn-cancel:hover {
+  background: color-mix(in srgb, var(--status-failed) 20%, transparent);
+}
+
+.btn-icon {
+  font-size: 0.75rem;
+}

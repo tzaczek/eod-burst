@@ -1,0 +1,21 @@
+# EOD Burst System - Grafana Datasources
+# Auto-provisioned on startup
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    uid: prometheus  # Fixed UID for dashboard references
+    isDefault: true
+    editable: false
+    jsonData:
+      timeInterval: "5s"
+
+  - name: Jaeger
+    type: jaeger
+    access: proxy
+    url: http://jaeger:16686
+    uid: jaeger  # Fixed UID for dashboard references
+    editable: false
