@@ -199,6 +199,35 @@
   box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
 }
 
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #6e40c9, #f778ba);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  animation: githubGlow 2s ease-in-out infinite;
+}
+
+.github-link:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(110, 64, 201, 0.5);
+}
+
+@keyframes githubGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(247, 120, 186, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(247, 120, 186, 0.6), 0 0 30px rgba(110, 64, 201, 0.4);
+  }
+}
+
 .link-icon {
   font-size: 1rem;
 }

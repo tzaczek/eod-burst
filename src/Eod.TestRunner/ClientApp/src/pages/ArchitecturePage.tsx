@@ -72,6 +72,24 @@ export function ArchitecturePage() {
             High-performance, distributed trade processing platform designed to handle 
             the extreme load spike that occurs at market close (4:00 PM EST).
           </p>
+          
+          {/* GitHub CTA Banner */}
+          <a 
+            href="https://github.com/tzaczek/eod-burst" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="github-cta"
+          >
+            <div className="github-cta-content">
+              <span className="github-cta-icon">⭐</span>
+              <div className="github-cta-text">
+                <span className="github-cta-title">Clone this repository!</span>
+                <span className="github-cta-subtitle">Get a production-ready CQRS architecture running in minutes</span>
+              </div>
+              <span className="github-cta-arrow">→</span>
+            </div>
+          </a>
+          
           <div className="hero-meta">
             <span className="meta-item">
               <span className="meta-icon">📅</span>

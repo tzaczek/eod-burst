@@ -74,6 +74,16 @@ export function Header({ isConnected }: HeaderProps) {
             <span className="link-icon">🔍</span>
             Jaeger
           </a>
+          
+          <a 
+            href="https://github.com/tzaczek/eod-burst" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="github-link"
+          >
+            <span className="link-icon">⭐</span>
+            GitHub
+          </a>
         </div>
       </div>
     </header>
